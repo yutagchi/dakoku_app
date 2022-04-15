@@ -54,20 +54,10 @@ app.get('/timestamp_list', (rew, res) => {
 connection.query(
   'SELECT * FROM timestamps',
   (error, results)=> {
-  res.render('timestamp_list.ejs',{timestamps: results[0]});
+  res.render('timestamp_list.ejs',{timestamps: results});
   }
 );
   
-});
-
-app.get('/sql', (req, res) => {
-  connection.query(
-    'SELECT * FROM users',
-    (error, results) => {
-      console.log(results);
-      res.render('sqlhello.ejs');
-    }
-  );
 });
 
 app.listen(3000);

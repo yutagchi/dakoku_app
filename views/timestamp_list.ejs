@@ -6,12 +6,10 @@
     <title>Hello World</title>
   </head>
   <body>
-      <p> <%= timestamps.username %> </p>
-      <p> <%= timestamps.status %> </p>
-      <p> <%= timestamps.timestamp %> </p>
     <ul>
-        
-
+        <% timestamps.forEach((timestamp) => { %>
+            <li> <%= timestamp.status %> <%= timestamp.timestamp %> </li>
+        <% }) %>
     </ul>
   </body>
 </html>
