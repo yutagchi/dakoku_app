@@ -8,7 +8,7 @@
   <body>
     <ul>
         <% timestamps.forEach((timestamp) => { %>
-            <li> 開始:<%= timestamp.begin_time %> 終了:<%= timestamp.finish_time %> </li>
+            <li> 開始: <%= timestamp.begin_time %> 終了: <%= timestamp.finish_time %> 労働時間: <%= timestamp.timediff %> </li>
         <% }) %>
     </ul>
   </body>

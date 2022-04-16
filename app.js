@@ -39,7 +39,12 @@ app.get('/begin', (rew, res) => {
 });
 
 app.get('/timestamp_list', (rew, res) => {
-connection.query(
+  connection.query(
+    'UPDATE timestamps SET difftime = (timediff(finish_time,begin_time))',
+    (error, results) => {
+    }
+  );
+  connection.query(
   'SELECT * FROM timestamps',
   (error, results)=> {
   res.render('timestamp_list.ejs',{timestamps: results});
@@ -72,7 +77,6 @@ app.get('/finish_normal', (rew, res) => {
     'UPDATE timestamps SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
     [nowTimeStamp],
     (error, results) => {
-      res.redirect('/');
     }
   );
 });
