@@ -8,7 +8,7 @@
   <body>
     <ul>
         <% timestamps.forEach((timestamp) => { %>
-            <li> <%= timestamp.status %> <%= timestamp.timestamp %> </li>
+            <li> 開始:<%= timestamp.begin_time %> 終了:<%= timestamp.finish_time %> </li>
         <% }) %>
     </ul>
   </body>

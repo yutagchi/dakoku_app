@@ -28,23 +28,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/begin', (rew, res) => {
-  let getTime = new Date();
+  let nowTimeStamp = new Date();
   connection.query(
-    'INSERT INTO timestamps (username,status,timestamp) VAlUES("yuki","bigin",?)',
-    [getTime],
+    'INSERT INTO timestamps (username,begin_time) VAlUES("yuki",?)',
+    [nowTimeStamp],
     (error, results) => {
-      console.log(nowTime);
-      res.redirect('/');
-    }
-  );
-});
-
-app.get('/finish', (rew, res) => {
-  let getTime = new Date();
-  connection.query(
-    'INSERT INTO timestamps (username,status,timestamp) VAlUES("yuki","finish",?)',
-    [getTime],
-      (error, results) => {
       res.redirect('/');
     }
   );
@@ -59,5 +47,43 @@ connection.query(
 );
   
 });
+
+app.get('/finish', (rew, res) => {
+  connection.query(
+    'SELECT finish_time FROM timestamps ORDER BY id DESC LIMIT 1',
+    (error,results) => {
+      const latest_finish_time = results.finish_time
+      console.log(latest_finish_time);
+      if(latest_finish_time === undefined){
+        res.redirect('/finish_normal');
+      }else{
+        res.redirect('/finish_abnormal');
+      }
+    }
+  );
+});
+
+app.get('/finish_normal', (rew, res) => {
+  let nowTimeStamp = new Date();
+  connection.query(
+    'UPDATE timestamps SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
+    [nowTimeStamp],
+    (error, results) => {
+      res.render('hello,ejs')
+    }
+  );
+});
+
+app.get('/finish_abnormal', (rew, res) => {
+  let nowTimeStamp = new Date();
+  connection.query(
+    'INSERT INTO timestamps (username,finish_time) VAlUES(?,?)',
+    ["yuki",nowTimeStamp],
+    (error,results) => {
+      res.render('hello,ejs')
+    }
+  );
+});
+
 
 app.listen(3000);
