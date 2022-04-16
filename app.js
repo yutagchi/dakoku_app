@@ -52,12 +52,15 @@ app.get('/finish', (rew, res) => {
   connection.query(
     'SELECT finish_time FROM timestamps ORDER BY id DESC LIMIT 1',
     (error,results) => {
-      const latest_finish_time = results.finish_time
+      console.log(results)
+      let latest_finish_time = results[0].finish_time
       console.log(latest_finish_time);
-      if(latest_finish_time === undefined){
+      if(latest_finish_time === null){
         res.redirect('/finish_normal');
+        console.log("未定義");
       }else{
         res.redirect('/finish_abnormal');
+        console.log("定義済み")
       }
     }
   );
@@ -69,7 +72,7 @@ app.get('/finish_normal', (rew, res) => {
     'UPDATE timestamps SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
     [nowTimeStamp],
     (error, results) => {
-      res.render('hello,ejs')
+      res.redirect('/');
     }
   );
 });
@@ -80,7 +83,7 @@ app.get('/finish_abnormal', (rew, res) => {
     'INSERT INTO timestamps (username,finish_time) VAlUES(?,?)',
     ["yuki",nowTimeStamp],
     (error,results) => {
-      res.render('hello,ejs')
+      res.redirect('/');
     }
   );
 });
