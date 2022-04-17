@@ -58,6 +58,20 @@ app.get('/timestamp_list', (rew, res) => {
   ); 
 });
 
+app.get('/timestamp_list_gb_days', (rew, res) => {
+  connection.query(
+    'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
+    (error, results) => {
+    }
+  );
+  connection.query(
+    'select convert(sum(timediff),time) as timediff,convert(begin_time,date) as date  from timestamps group by convert(begin_time,date);',
+      (error, results)=> {;
+        res.render('timestamp_list_gb_days.ejs',{timestamps: results});
+    }
+  ); 
+});
+
 app.get('/edit/:id', (req, res) => {
   connection.query(
     'SELECT * FROM timestamps WHERE id = ?',
