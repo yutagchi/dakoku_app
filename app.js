@@ -1,3 +1,4 @@
+//下準備
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
@@ -6,7 +7,7 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//mysql接続情報
+//mysqlの準備
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -24,6 +25,7 @@ connection.connect((err) => {
 
 //ここから本体
 
+//トップ
 app.get('/', (req, res) => {
   function set2fig(num) {
     var ret;
@@ -39,21 +41,7 @@ app.get('/', (req, res) => {
   res.render('home.ejs',{now: nowTime});
 });
 
-app.get('/begin', (rew, res) => {
-  let nowTimeStamp = new Date();
-  connection.query(
-    'INSERT INTO timestamps (username,begin_time) VAlUES("yuki",?)',
-    [nowTimeStamp],
-    (error, results) => {
-      res.redirect('/begin_done');
-    }
-  );
-});
-
-app.get('/begin_done', (req, res) => {
-  res.render('begin_done.ejs')
-});
-
+//打刻一覧
 app.get('/timestamp_list', (rew, res) => {
   connection.query(
     'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
@@ -68,20 +56,7 @@ app.get('/timestamp_list', (rew, res) => {
   ); 
 });
 
-app.get('/timestamp_list_gb_days', (rew, res) => {
-  connection.query(
-    'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
-    (error, results) => {
-    }
-  );
-  connection.query(
-    'select convert(sum(timediff),time) as timediff,convert(begin_time,date) as date  from timestamps group by convert(begin_time,date);',
-      (error, results)=> {
-        res.render('timestamp_list_gb_days.ejs',{timestamps: results});
-    }
-  ); 
-});
-
+//打刻編集
 app.get('/edit/:id', (req, res) => {
   connection.query(
     'SELECT * FROM timestamps WHERE id = ?',
@@ -105,6 +80,38 @@ app.post('/update/:id', (req, res) => {
   );
 });
 
+//打刻一覧（日ごと）
+app.get('/timestamp_list_gb_days', (rew, res) => {
+  connection.query(
+    'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
+    (error, results) => {
+    }
+  );
+  connection.query(
+    'select convert(sum(timediff),time) as timediff,convert(begin_time,date) as date  from timestamps group by convert(begin_time,date);',
+      (error, results)=> {
+        res.render('timestamp_list_gb_days.ejs',{timestamps: results});
+    }
+  ); 
+});
+
+//出勤
+app.get('/begin', (rew, res) => {
+  let nowTimeStamp = new Date();
+  connection.query(
+    'INSERT INTO timestamps (username,begin_time) VAlUES("yuki",?)',
+    [nowTimeStamp],
+    (error, results) => {
+      res.redirect('/begin_done');
+    }
+  );
+});
+
+app.get('/begin_done', (req, res) => {
+  res.render('begin_done.ejs')
+});
+
+//退勤
 app.get('/finish', (rew, res) => {
   connection.query(
     'SELECT finish_time FROM timestamps ORDER BY id DESC LIMIT 1',
@@ -148,5 +155,6 @@ app.get('/finish_abnormal', (rew, res) => {
 app.get('/finish_done', (req, res) => {
   res.render('finish_done.ejs')
 });
+
 
 app.listen(3000);
