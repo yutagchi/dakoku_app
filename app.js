@@ -1,8 +1,13 @@
+//下準備
 const express = require('express');
 const mysql = require('mysql');
-
 const app = express();
 
+//body-parser使えるように
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//mysqlの準備
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -18,41 +23,95 @@ connection.connect((err) => {
   console.log('success');
 });
 
+//ここから本体
+
+//トップ
 app.get('/', (req, res) => {
+  function set2fig(num) {
+    var ret;
+    if( num < 10 ) { ret = "0" + num; }
+    else { ret = num; }
+    return ret;
+ }
   let getTime = new Date();
-  let nowHour = getTime.getHours();
-  let nowMin  = getTime.getMinutes();
-  let nowSec  = getTime.getSeconds();
+  let nowHour = set2fig( getTime.getHours() );
+  let nowMin  = set2fig( getTime.getMinutes() );
+  let nowSec  = set2fig( getTime.getSeconds() );
   let nowTime = nowHour + ":" + nowMin + ":" + nowSec;
-  res.render('hello.ejs',{now: nowTime});
+  res.render('home.ejs',{now: nowTime});
 });
 
+//打刻一覧
+app.get('/timestamp_list', (rew, res) => {
+  connection.query(
+    'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
+    (error, results) => {
+    }
+  );
+  connection.query(
+    'SELECT id, timediff, convert(begin_time,date) AS begin_date, convert(begin_time,time) AS begin_time, convert(finish_time,date) AS finish_date, convert(finish_time,time) AS finish_time from timestamps',
+      (error, results)=> {
+      res.render('timestamp_list.ejs',{timestamps: results});
+    }
+  ); 
+});
+
+//打刻編集
+app.get('/edit/:id', (req, res) => {
+  connection.query(
+    'SELECT * FROM timestamps WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('edit.ejs', {timestamp: results[0]});
+    }
+  );
+});
+
+app.post('/update/:id', (req, res) => {
+  console.log(req.body.begin_time);
+  console.log(req.body.finish_time);
+  console.log(req.params.id);
+  connection.query(
+    'UPDATE timestamps SET begin_time = ?, finish_time = ? WHERE id = ?',
+    [req.body.begin_time, req.body.finish_time, req.params.id],
+    (error, results) => {
+      res.redirect('/timestamp_list');
+    }
+  );
+});
+
+//打刻一覧（日ごと）
+app.get('/timestamp_list_gb_days', (rew, res) => {
+  connection.query(
+    'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
+    (error, results) => {
+    }
+  );
+  connection.query(
+    'select convert(sum(timediff),time) as timediff,convert(begin_time,date) as date  from timestamps group by convert(begin_time,date);',
+      (error, results)=> {
+        res.render('timestamp_list_gb_days.ejs',{timestamps: results});
+    }
+  ); 
+});
+
+//出勤
 app.get('/begin', (rew, res) => {
   let nowTimeStamp = new Date();
   connection.query(
     'INSERT INTO timestamps (username,begin_time) VAlUES("yuki",?)',
     [nowTimeStamp],
     (error, results) => {
-      res.redirect('/');
+      res.redirect('/begin_done');
     }
   );
 });
 
-app.get('/timestamp_list', (rew, res) => {
-  connection.query(
-    'UPDATE timestamps SET difftime = (timediff(finish_time,begin_time))',
-    (error, results) => {
-    }
-  );
-  connection.query(
-  'SELECT * FROM timestamps',
-  (error, results)=> {
-  res.render('timestamp_list.ejs',{timestamps: results});
-  }
-);
-  
+app.get('/begin_done', (req, res) => {
+  res.render('begin_done.ejs')
 });
 
+//退勤
 app.get('/finish', (rew, res) => {
   connection.query(
     'SELECT finish_time FROM timestamps ORDER BY id DESC LIMIT 1',
@@ -77,6 +136,7 @@ app.get('/finish_normal', (rew, res) => {
     'UPDATE timestamps SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
     [nowTimeStamp],
     (error, results) => {
+      res.redirect('/finish_done');
     }
   );
 });
@@ -87,9 +147,13 @@ app.get('/finish_abnormal', (rew, res) => {
     'INSERT INTO timestamps (username,finish_time) VAlUES(?,?)',
     ["yuki",nowTimeStamp],
     (error,results) => {
-      res.redirect('/');
+      res.redirect('/finish_done');
     }
   );
+});
+
+app.get('/finish_done', (req, res) => {
+  res.render('finish_done.ejs')
 });
 
 
