@@ -8,7 +8,7 @@
   <body>
     <ul>
         <% timestamps.forEach((timestamp) => { %>
-            <li> 日付: <%= timestamp.date %> 労働時間: <%= timestamp.timediff %> <a href="/edit/<%= timestamp.id %> ">編集</a> </li>
+            <li> 日付: <%= timestamp.date %> 労働時間: <%= timestamp.timediff %> </li>
         <% }) %>
     </ul>
   </body>

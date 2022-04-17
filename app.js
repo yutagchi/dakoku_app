@@ -25,10 +25,16 @@ connection.connect((err) => {
 //ここから本体
 
 app.get('/', (req, res) => {
+  function set2fig(num) {
+    var ret;
+    if( num < 10 ) { ret = "0" + num; }
+    else { ret = num; }
+    return ret;
+ }
   let getTime = new Date();
-  let nowHour = getTime.getHours();
-  let nowMin  = getTime.getMinutes();
-  let nowSec  = getTime.getSeconds();
+  let nowHour = set2fig( getTime.getHours() );
+  let nowMin  = set2fig( getTime.getMinutes() );
+  let nowSec  = set2fig( getTime.getSeconds() );
   let nowTime = nowHour + ":" + nowMin + ":" + nowSec;
   res.render('hello.ejs',{now: nowTime});
 });
@@ -51,7 +57,7 @@ app.get('/timestamp_list', (rew, res) => {
     }
   );
   connection.query(
-    'SELECT * FROM timestamps',
+    'SELECT id, timediff, convert(begin_time,date) AS begin_date, convert(begin_time,time) AS begin_time, convert(finish_time,date) AS finish_date, convert(finish_time,time) AS finish_time from timestamps',
       (error, results)=> {
       res.render('timestamp_list.ejs',{timestamps: results});
     }
@@ -66,7 +72,7 @@ app.get('/timestamp_list_gb_days', (rew, res) => {
   );
   connection.query(
     'select convert(sum(timediff),time) as timediff,convert(begin_time,date) as date  from timestamps group by convert(begin_time,date);',
-      (error, results)=> {;
+      (error, results)=> {
         res.render('timestamp_list_gb_days.ejs',{timestamps: results});
     }
   ); 
