@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   let nowMin  = set2fig( getTime.getMinutes() );
   let nowSec  = set2fig( getTime.getSeconds() );
   let nowTime = nowHour + ":" + nowMin + ":" + nowSec;
-  res.render('hello.ejs',{now: nowTime});
+  res.render('home.ejs',{now: nowTime});
 });
 
 app.get('/begin', (rew, res) => {
@@ -45,9 +45,13 @@ app.get('/begin', (rew, res) => {
     'INSERT INTO timestamps (username,begin_time) VAlUES("yuki",?)',
     [nowTimeStamp],
     (error, results) => {
-      res.redirect('/');
+      res.redirect('/begin_done');
     }
   );
+});
+
+app.get('/begin_done', (req, res) => {
+  res.render('begin_done.ejs')
 });
 
 app.get('/timestamp_list', (rew, res) => {
@@ -125,6 +129,7 @@ app.get('/finish_normal', (rew, res) => {
     'UPDATE timestamps SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
     [nowTimeStamp],
     (error, results) => {
+      res.redirect('/finish_done');
     }
   );
 });
@@ -135,10 +140,13 @@ app.get('/finish_abnormal', (rew, res) => {
     'INSERT INTO timestamps (username,finish_time) VAlUES(?,?)',
     ["yuki",nowTimeStamp],
     (error,results) => {
-      res.redirect('/');
+      res.redirect('/finish_done');
     }
   );
 });
 
+app.get('/finish_done', (req, res) => {
+  res.render('finish_done.ejs')
+});
 
 app.listen(3000);
