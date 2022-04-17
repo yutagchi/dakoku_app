@@ -46,7 +46,7 @@ app.get('/begin', (rew, res) => {
 
 app.get('/timestamp_list', (rew, res) => {
   connection.query(
-    'UPDATE timestamps SET difftime = (timediff(finish_time,begin_time))',
+    'UPDATE timestamps SET timediff = (timediff(finish_time,begin_time))',
     (error, results) => {
     }
   );
