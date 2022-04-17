@@ -7,6 +7,7 @@
   <body>
    <form action="/update/<%= timestamp.id %>" method="post">
        <input type="datetime-local" name="begin_time" value="<%= timestamp.begin_time %>">
+       <input type="datetime-local" name="finish_time" value="<%= timestamp.finish_time %>">
        <input type="submit" value="更新する">
    </form>
   </body>
