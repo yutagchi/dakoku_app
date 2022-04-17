@@ -45,12 +45,32 @@ app.get('/timestamp_list', (rew, res) => {
     }
   );
   connection.query(
-  'SELECT * FROM timestamps',
-  (error, results)=> {
-  res.render('timestamp_list.ejs',{timestamps: results});
-  }
-);
-  
+    'SELECT * FROM timestamps',
+      (error, results)=> {
+      res.render('timestamp_list.ejs',{timestamps: results});
+    }
+  ); 
+});
+
+app.get('/edit/:id', (req, res) => {
+  connection.query(
+    'SELECT * FROM timestamps WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('edit.ejs', {timestamp: results[0]});
+    }
+  );
+});
+
+app.post('/update/:id', (req, res) => {
+  connection.query(
+    'UPDATE timestamps SET begin_time = ? finish_time = ? WHERE id = ?',
+    [req.body.begin_time, req.body.finish_time, req.params.id],
+    (error, results) => {
+      console.log(req.body.begin_time);
+      res.redirect('/timestamp_list');
+    }
+  );
 });
 
 app.get('/finish', (rew, res) => {
