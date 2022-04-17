@@ -1,8 +1,12 @@
 const express = require('express');
 const mysql = require('mysql');
-
 const app = express();
 
+//body-parser使えるように
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//mysql接続情報
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -17,6 +21,8 @@ connection.connect((err) => {
   }
   console.log('success');
 });
+
+//ここから本体
 
 app.get('/', (req, res) => {
   let getTime = new Date();
@@ -63,11 +69,12 @@ app.get('/edit/:id', (req, res) => {
 });
 
 app.post('/update/:id', (req, res) => {
+  console.log(req.body.begin_time);
+  console.log(req.params.id);
   connection.query(
-    'UPDATE timestamps SET begin_time = ? finish_time = ? WHERE id = ?',
-    [req.body.begin_time, req.body.finish_time, req.params.id],
+    'UPDATE timestamps SET begin_time = ? WHERE id = ?',
+    [req.body.begin_time, req.params.id],
     (error, results) => {
-      console.log(req.body.begin_time);
       res.redirect('/timestamp_list');
     }
   );

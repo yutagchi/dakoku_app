@@ -5,10 +5,10 @@
     <title>Hello World</title>
   </head>
   <body>
-   <form action="/update/<%= timestamp.id %>" metod="post">
-       <input type="text" name="begin_time" value="<%= timestamp.begin_time %>">
-       <input type="text" name="finish_time" value="<%= timestamp.finish_time %>">
+   <form action="/update/<%= timestamp.id %>" method="post">
+       <input type="datetime-local" name="begin_time" value="<%= timestamp.begin_time %>">
        <input type="submit" value="更新する">
    </form>
   </body>
 </html>
+
