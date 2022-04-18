@@ -205,8 +205,13 @@ app.get('/finish_abnormal', (rew, res) => {
 app.get('/finish_done', (req, res) => {
   connection.query(
     'SELECT content FROM setting WHERE id IN (4,6)',
-    (error, results) => {
-      res.render('finish_done.ejs',{settings: results})
+    (error_settings, results_settings) => {
+      connection.query(
+        'SELECT * FROM todolist',
+        (error_todolist, results_todolist) => {
+          res.render('finish_done.ejs',{settings: results_settings,tasks: results_todolist})
+        }
+      );
     }
   );
 });

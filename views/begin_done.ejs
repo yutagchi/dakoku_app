@@ -27,6 +27,7 @@
     <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
     <br>
     <h2>TODO一覧</h2>
+    <a href="/todolist/add">タスクを追加する</a>
     <ul>
       <% tasks.forEach((task) => { %>
           <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
