@@ -80,6 +80,46 @@ app.post('/update/:id', (req, res) => {
   );
 });
 
+//打刻削除
+app.get('/confirm_delete/:id', (req, res) => {
+  connection.query(
+    'SELECT * FROM timestamps WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('confirm_delete.ejs', {timestamp: results[0]});
+    }
+  );
+});
+
+app.post('/delete/:id', (req, res) => {
+  connection.query(
+    'DELETE FROM timestamps WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('delete.ejs', {timestamp: results[0]});
+    }
+  );
+});
+
+//打刻追加
+app.get('/add_timestamp_edit', (req, res) => {
+      res.render('add_timestamp_edit.ejs');
+});
+
+app.post('/add_timestamp', (req, res) => {
+  connection.query(
+    'INSERT INTO timestamps (username,begin_time,finish_time) VAlUES("yuki",?,?)',
+    [req.body.begin_time, req.body.finish_time],
+    (error, results) => {
+      res.redirect('add_timestamp_done');
+    }
+  );
+});
+
+app.get('/add_timestamp_done', (req, res) => {
+  res.render('add_timestamp_done.ejs');
+});
+
 //打刻一覧（日ごと）
 app.get('/timestamp_list_gb_days', (rew, res) => {
   connection.query(
