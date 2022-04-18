@@ -206,6 +206,60 @@ app.get('/finish_done', (req, res) => {
   );
 });
 
+//TODOリスト
+app.get('/todolist', (req, res) => {
+  connection.query(
+    'SELECT * FROM todolist',
+    (error, results) => {
+      res.render('todolist.ejs',{tasks: results});
+    }
+  )
+});
+
+app.get('/todolist/add', (req, res) => {
+  res.render('todolist_add.ejs');
+});
+
+app.post('/todolist/add/update', (req, res) => {
+  connection.query(
+    'INSERT INTO todolist(name) values(?)',
+    [req.body.newtask],
+    (error, results) => {
+      res.redirect('/todolist');
+    }
+  )
+});
+
+app.get('/todolist/edit/:id', (req, res) => {
+  connection.query(
+    'SELECT id,name FROM todolist WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('todolist_edit.ejs', {task: results[0]});
+    }
+  );
+});
+
+app.post('/todolist/update/:id', (req, res) => {
+  connection.query(
+    'UPDATE todolist SET name = ? WHERE id = ?',
+    [req.body.newtask, req.params.id],
+    (error, results) => {
+      res.redirect('/todolist');
+    }
+  );
+});
+
+app.get('/todolist/delete/:id', (req, res) => {
+  connection.query(
+    'DELETE FROM todolist WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.redirect('/todolist');
+    }
+  );
+});
+
 //設定画面
 app.get('/setting', (req, res) => {
   connection.query(

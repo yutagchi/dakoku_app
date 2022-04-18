@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello World</title>
+  </head>
+  <body>
+    <a href="/todolist/add">タスクを追加する</a>
+    <ul>
+        <% tasks.forEach((task) => { %>
+            <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
+              </li>
+        <% }) %>
+    </ul>
+  </body>
+</html>
