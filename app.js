@@ -149,8 +149,7 @@ app.get('/begin', (rew, res) => {
 
 app.get('/begin_done', (req, res) => {
   connection.query(
-    'SELECT content FROM setting WHERE id = ?',
-    [4,5],
+    'SELECT content FROM setting WHERE id IN (4,5)',
     (error, results) => {
       res.render('begin_done.ejs',{settings: results})
     }

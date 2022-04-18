@@ -16,13 +16,15 @@
           // 選択しているテキストをクリップボードにコピーする
           document.execCommand("Copy");
 
-          // コピーをお知らせする
-          alert("コピーできました！ : " + copyTarget.value);
+          // コピーをお知らせする（使わない）
+          //alert("コピーできました！ : " + copyTarget.value);
       }
   </script>
     <h1>出勤しました！</h1>
-    <input id="copyTarget" type="text" value=<%= settings[0].content %> readonly>
-    <button onclick="copyToClipboard()">Copy text</button>
+    <h2>チャットへ連絡する</h2>
+    <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
+    <button onclick="copyToClipboard()">コピー</button>
+    <button onclick="location.href='<%= settings[0].content %>'">チャット起動</button>
     <br>
     <a href="/">トップへ戻る</a>
   </body>
