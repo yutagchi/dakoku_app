@@ -6,10 +6,56 @@
     <meta http-equiv="Content-Language" content="ja">
     <meta name="google" content="notranslate">
     <title>Hello World</title>
-    <meta http-equiv="refresh" content="1" url="/">
   </head>
   <body>
-    <h1> <%= now %> </h1>
+    <script>
+      function set2fig(num) {
+        // 桁数が1桁だったら先頭に0を加えて2桁に調整する
+        var ret;
+        if( num < 10 ) { ret = "0" + num; }
+        else { ret = num; }
+        return ret;
+      }
+      function showClock_time() {
+        var nowTime = new Date();
+        var nowHour = set2fig( nowTime.getHours() );
+        var nowMin  = set2fig( nowTime.getMinutes() );
+        var nowSec  = set2fig( nowTime.getSeconds() );
+        var msg_time = nowHour + ":" + nowMin + ":" + nowSec;
+        document.getElementById("RealtimeClockArea").innerHTML = msg_time;
+      }
+      setInterval('showClock_time()',100);
+
+      function showClock_Date() {
+        var nowTime = new Date();
+        var nowYear = nowTime.getFullYear();
+        var nowMonth = set2fig( nowTime.getMonth()+1 );
+        var nowDate = set2fig( nowTime.getDate() );
+        var nowDay_int = nowTime.getDay();
+
+        if(nowDay_int === 0){
+          var nowDay = "日"; 
+        }else if(nowDay_int === 1){
+          var nowDay = "月"; 
+        }else if(nowDay_int === 2){
+          var nowDay = "火"; 
+        }else if(nowDay_int === 3){
+          var nowDay = "水"; 
+        }else if(nowDay_int === 4){
+          var nowDay = "木"; 
+        }else if(nowDay_int === 5){
+          var nowDay = "金"; 
+        }else{
+          var nowDay = "土"; 
+        }
+
+        var msg_date = nowYear + "年" + nowMonth + "月" + nowDate + "日 (" + nowDay + ")";
+        document.getElementById("clock_date").innerHTML = msg_date;
+      }
+      setInterval('showClock_Date()',100);
+    </script>
+    <h1 id="RealtimeClockArea"></h1>
+    <h2 id="clock_date"></h2>
     <a href="/begin">出勤</a>
     <a href="/finish">退勤</a>
     <a href="/timestamp_list">打刻一覧</a>
