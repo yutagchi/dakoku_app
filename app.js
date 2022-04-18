@@ -101,6 +101,25 @@ app.post('/delete/:id', (req, res) => {
   );
 });
 
+//打刻追加
+app.get('/add_timestamp_edit', (req, res) => {
+      res.render('add_timestamp_edit.ejs');
+});
+
+app.post('/add_timestamp', (req, res) => {
+  connection.query(
+    'INSERT INTO timestamps (username,begin_time,finish_time) VAlUES("yuki",?,?)',
+    [req.body.begin_time, req.body.finish_time],
+    (error, results) => {
+      res.redirect('add_timestamp_done');
+    }
+  );
+});
+
+app.get('/add_timestamp_done', (req, res) => {
+  res.render('add_timestamp_done.ejs');
+});
+
 //打刻一覧（日ごと）
 app.get('/timestamp_list_gb_days', (rew, res) => {
   connection.query(

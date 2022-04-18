@@ -6,6 +6,7 @@
   </head>
   <body>
     <a href="/timestamp_list_gb_days">日別に見る</a>
+    <a href="/add_timestamp_edit">打刻を追加する</a>
     <ul>
         <% timestamps.forEach((timestamp) => { %>
             <li> 開始: <%= timestamp.begin_date %> <%= timestamp.begin_time %> 終了: <%= timestamp.finish_date%> <%= timestamp.finish_time %> 労働時間: <%= timestamp.timediff %> 
