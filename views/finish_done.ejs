@@ -9,7 +9,7 @@
     <h2>チャットへ連絡する</h2>
     <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
     <button onclick="copyToClipboard()">コピー</button>
-    <button onclick="location.href='<%= settings[0].content %>'">チャット起動</button>
+    <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
     <br>
     <p>今日もお疲れ様でした</p>
     <br>
