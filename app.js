@@ -198,7 +198,12 @@ app.get('/finish_abnormal', (rew, res) => {
 });
 
 app.get('/finish_done', (req, res) => {
-  res.render('finish_done.ejs')
+  connection.query(
+    'SELECT content FROM setting WHERE id IN (4,6)',
+    (error, results) => {
+      res.render('finish_done.ejs',{settings: results})
+    }
+  );
 });
 
 //設定画面
