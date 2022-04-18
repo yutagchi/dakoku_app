@@ -148,7 +148,12 @@ app.get('/begin', (rew, res) => {
 });
 
 app.get('/begin_done', (req, res) => {
-  res.render('begin_done.ejs')
+  connection.query(
+    'SELECT content FROM setting WHERE id IN (4,5)',
+    (error, results) => {
+      res.render('begin_done.ejs',{settings: results})
+    }
+  );
 });
 
 //退勤
@@ -193,8 +198,45 @@ app.get('/finish_abnormal', (rew, res) => {
 });
 
 app.get('/finish_done', (req, res) => {
-  res.render('finish_done.ejs')
+  connection.query(
+    'SELECT content FROM setting WHERE id IN (4,6)',
+    (error, results) => {
+      res.render('finish_done.ejs',{settings: results})
+    }
+  );
 });
+
+//設定画面
+app.get('/setting', (req, res) => {
+  connection.query(
+    'SELECT * FROM setting',
+    (error, results) => {
+      res.render('setting.ejs',{settings: results});
+    }
+  );
+});
+
+app.get('/setting/edit/:id', (req, res) => {
+  connection.query(
+    'SELECT * FROM setting WHERE id = ?',
+    [req.params.id],
+    (error, results) => {
+      res.render('setting_edit.ejs', {setting: results[0]});
+    }
+  );
+});
+
+app.post('/setting/update/:id', (req, res) => {
+  connection.query(
+    'UPDATE setting SET content = ? WHERE id = ?',
+    [req.body.newcontent, req.params.id],
+    (error, results) => {
+      res.redirect('/setting');
+    }
+  );
+});
+
+app.post('setting/edit')
 
 
 app.listen(3000);

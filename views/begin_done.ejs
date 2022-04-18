@@ -5,7 +5,27 @@
     <title>Hello World</title>
   </head>
   <body>
+    <script>
+      function copyToClipboard() {
+          // コピー対象をJavaScript上で変数として定義する
+          var copyTarget = document.getElementById("copyTarget");
+
+          // コピー対象のテキストを選択する
+          copyTarget.select();
+
+          // 選択しているテキストをクリップボードにコピーする
+          document.execCommand("Copy");
+
+          // コピーをお知らせする（使わない）
+          //alert("コピーできました！ : " + copyTarget.value);
+      }
+  </script>
     <h1>出勤しました！</h1>
+    <h2>チャットへ連絡する</h2>
+    <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
+    <button onclick="copyToClipboard()">コピー</button>
+    <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
+    <br>
     <a href="/">トップへ戻る</a>
   </body>
 </html>
