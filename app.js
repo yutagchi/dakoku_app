@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
     (error_delete,results_delete) =>{}
   );
   
+  //今日のyyyy-mm-ddを取得
   function set2fig(num) {
     // 桁数が1桁だったら先頭に0を加えて2桁に調整する
     var ret;
@@ -64,7 +65,7 @@ app.get('/', (req, res) => {
     'SELECT * FROM work_time_today ORDER BY begin_time DESC LIMIT 1',
     (error_addFT,results_addFT) => {
 
-      let latest_finish_time = results_addFT.finish_time
+      let latest_finish_time = results_addFT[0].finish_time
       let nowTimeStamp = new Date();
       console.log(latest_finish_time);
   
