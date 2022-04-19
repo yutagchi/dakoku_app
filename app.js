@@ -49,7 +49,7 @@ app.get('/timestamp_list', (rew, res) => {
     }
   );
   connection.query(
-    'SELECT id, timediff, convert(begin_time,date) AS begin_date, convert(begin_time,time) AS begin_time, convert(finish_time,date) AS finish_date, convert(finish_time,time) AS finish_time from timestamps',
+    'SELECT id, timediff, begin_time, finish_time from timestamps',
       (error, results)=> {
       res.render('timestamp_list.ejs',{timestamps: results});
     }
