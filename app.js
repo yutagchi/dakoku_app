@@ -86,8 +86,9 @@ app.get('/', (req, res) => {
   );
 
   connection.query(
-    'select convert(sum(timediff),time) AS timediff from work_time_today',
+    'SELECT sec_to_time(sum(timediff)) as timediff from work_time_today',
     (error_timediffSum,results_timediffSum) => {
+      console.log(results_timediffSum[0]);
       res.render('home.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]});
     }
   )
