@@ -9,8 +9,10 @@
     <a href="/add_timestamp_edit">打刻を追加する</a>
     <ul>
         <% timestamps.forEach((timestamp) => { %>
-            <li> 開始: <%= timestamp.begin_date %> <%= timestamp.begin_time %> 終了: <%= timestamp.finish_date%> <%= timestamp.finish_time %> 労働時間: <%= timestamp.timediff %> 
-              <a href="/edit/<%= timestamp.id %> ">編集</a> <a href="/confirm_delete/<%= timestamp.id %>">削除</a> </li>
+          <li> 
+            <a href="/edit/<%= timestamp.id %> ">編集</a> <a href="/confirm_delete/<%= timestamp.id %>">削除</a>
+             開始: <%= timestamp.begin_time %> 終了: <%= timestamp.finish_time %> 労働時間: <%= timestamp.timediff %> 
+          </li>
         <% }) %>
     </ul>
   </body>
