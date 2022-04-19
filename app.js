@@ -27,18 +27,69 @@ connection.connect((err) => {
 
 //トップ
 app.get('/', (req, res) => {
+
+  //リセット
+  connection.query(
+    'DELETE FROM work_time_today',
+    (error_delete,results_delete) =>{}
+  );
+  
   function set2fig(num) {
+    // 桁数が1桁だったら先頭に0を加えて2桁に調整する
     var ret;
     if( num < 10 ) { ret = "0" + num; }
     else { ret = num; }
     return ret;
- }
-  let getTime = new Date();
-  let nowHour = set2fig( getTime.getHours() );
-  let nowMin  = set2fig( getTime.getMinutes() );
-  let nowSec  = set2fig( getTime.getSeconds() );
-  let nowTime = nowHour + ":" + nowMin + ":" + nowSec;
-  res.render('home.ejs',{now: nowTime});
+  }
+
+  let nowTime = new Date();
+  let nowYear = nowTime.getFullYear();
+  let nowMonth = set2fig( nowTime.getMonth()+1 );
+  let nowDate = set2fig( nowTime.getDate() );
+  var yyyymmddDate = nowYear + "-" + nowMonth + "-" + nowDate;
+  console.log(yyyymmddDate);
+
+  //今日のやつをコピー
+  connection.query(
+    'INSERT INTO work_time_today SELECT * FROM timestamps WHERE convert(begin_time,date) = ?',
+    [yyyymmddDate],
+    (error_insertWT,results_insertWT) =>{}
+  );
+
+  //出退勤のステータスを入れる配列を用意（なぜかconnection.queryの中だと動かん）
+  var nowAtWork = [];
+
+  //もし出勤中だったらfinifh_time入力
+  connection.query(
+    'SELECT * FROM work_time_today ORDER BY begin_time DESC LIMIT 1',
+    (error_addFT,results_addFT) => {
+
+      let latest_finish_time = results_addFT.finish_time
+      let nowTimeStamp = new Date();
+      console.log(latest_finish_time);
+  
+      console.log(nowAtWork);
+
+      if(latest_finish_time === null){
+        console.log("未定義");
+        nowAtWork.push("勤務中");
+        connection.query(
+          'UPDATE work_time_today SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
+          [nowTimeStamp],
+          (error_addFTDone, results_addFTDone) => {}
+        );
+      }else{
+        nowAtWork.push("退勤済み");
+      }
+    }
+  );
+
+  connection.query(
+    'select convert(sum(timediff),time) AS timediff from work_time_today',
+    (error_timediffSum,results_timediffSum) => {
+      res.render('home.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]});
+    }
+  )
 });
 
 //打刻一覧
