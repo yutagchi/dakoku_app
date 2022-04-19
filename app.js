@@ -56,6 +56,9 @@ app.get('/', (req, res) => {
     (error_insertWT,results_insertWT) =>{}
   );
 
+  //出退勤のステータスを入れる配列を用意（なぜかconnection.queryの中だと動かん）
+  var nowAtWork = [];
+
   //もし出勤中だったらfinifh_time入力
   connection.query(
     'SELECT * FROM work_time_today ORDER BY begin_time DESC LIMIT 1',
@@ -65,20 +68,26 @@ app.get('/', (req, res) => {
       let nowTimeStamp = new Date();
       console.log(latest_finish_time);
   
+      console.log(nowAtWork);
+
       if(latest_finish_time === null){
         console.log("未定義");
+        nowAtWork.push("勤務中");
         connection.query(
           'UPDATE work_time_today SET finish_time = ? WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
           [nowTimeStamp],
           (error_addFTDone, results_addFTDone) => {}
         );
+      }else{
+        nowAtWork.push("退勤済み");
       }
     }
   );
+
   connection.query(
     'select convert(sum(timediff),time) AS timediff from work_time_today',
     (error_timediffSum,results_timediffSum) => {
-      res.render('home.ejs',{timediff: results_timediffSum[0]})
+      res.render('home.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]});
     }
   )
 });
