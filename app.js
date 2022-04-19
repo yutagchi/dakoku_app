@@ -67,43 +67,46 @@ app.get('', (req, res) => {
     'SELECT * FROM work_time_today ORDER BY begin_time DESC LIMIT 1',
     (error_addFT,results_addFT) => {
 
-      let latest_finish_time = results_addFT[0].finish_time
-      let nowTimeStamp = new Date();
-      console.log(latest_finish_time);
+      //今日の打刻があるかないか
+      if(results_addFT[0] === undefined){
+       res.render('home_day_first.ejs') //今日の打刻がなかったら計算する必要がないのでそのままrender
+      }else{ //今日の打刻があったら現時点での労働時間を計算して渡す
+        let latest_finish_time = results_addFT[0].finish_time
+        let nowTimeStamp = new Date();
+        console.log(latest_finish_time);
+    
+        console.log(nowAtWork);
   
-      console.log(nowAtWork);
-
-      if(latest_finish_time === null) {
-        console.log("未定義");
-        nowAtWork.push("勤務中");
+        if(latest_finish_time === null) {
+          console.log("未定義");
+          nowAtWork.push("勤務中");
+          connection.query(
+            'UPDATE work_time_today SET finish_time = ?,timediff = (timediff(finish_time,begin_time)) WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
+            [nowTimeStamp],
+            (error_addFTDone, results_addFTDone) => {}
+          );
+        }else{
+          nowAtWork.push("退勤済み");
+        }
+        //timediffを再計算
         connection.query(
-          'UPDATE work_time_today SET finish_time = ?,timediff = (timediff(finish_time,begin_time)) WHERE id in (SELECT id FROM (SELECT id FROM timestamps ORDER BY id DESC LIMIT 1)tmp)',
-          [nowTimeStamp],
-          (error_addFTDone, results_addFTDone) => {}
+         'UPDATE work_time_today SET timediff = (timediff(finish_time,begin_time))',
+          (error_recalc_timediff,results_recalc_timediff) => {
+         }
         );
-      }else{
-        nowAtWork.push("退勤済み");
+
+        //今日の出勤合計をejsに渡す
+        connection.query(
+          'SELECT sec_to_time(sum(timediff)) as timediff from work_time_today',
+          (error_timediffSum,results_timediffSum) => {
+           console.log(results_timediffSum);
+            res.render('home.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]});
+            console.log(typeof(results_timediffSum));
+          }
+        )
       }
     }
   );
-
-  //timediffを再計算
-  connection.query(
-    'UPDATE work_time_today SET timediff = (timediff(finish_time,begin_time))',
-    (error_recalc_timediff,results_recalc_timediff) => {
-    }
-  );
-
-  //今日の出勤合計をejsに渡す
-  connection.query(
-    'SELECT sec_to_time(sum(timediff)) as timediff from work_time_today',
-    (error_timediffSum,results_timediffSum) => {
-      console.log(results_timediffSum);
-      res.render('home.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]});
-      console.log(typeof(results_timediffSum));
-    }
-  )
-
 });
 
 //打刻一覧
