@@ -5,7 +5,37 @@
     <title>Hello World</title>
   </head>
   <body>
-    <a href="/">ホームに戻る</a>
+    <script>
+      function copyToClipboardBegin() {
+          // コピー対象をJavaScript上で変数として定義する
+          var copyTargetBegin = document.getElementById("copyTargetBegin");
+
+          // コピー対象のテキストを選択する
+          copyTargetBegin.select();
+
+          // 選択しているテキストをクリップボードにコピーする
+          document.execCommand("Copy");
+
+          // コピーをお知らせする（使わない）
+          //alert("コピーできました！ : " + copyTargetBegin.value);
+      }
+
+      function copyToClipboardFinish() {
+          // コピー対象をJavaScript上で変数として定義する
+          var copyTargetFinish = document.getElementById("copyTargetFinish");
+
+          // コピー対象のテキストを選択する
+          copyTargetFinish.select();
+
+          // 選択しているテキストをクリップボードにコピーする
+          document.execCommand("Copy");
+
+          // コピーをお知らせする（使わない）
+          //alert("コピーできました！ : " + copyTargetFinish.value);
+      }
+  </script>
+    <h1>設定</h1>
+    <h2>出退勤時のチャット送信</h2>
     <ul>
         <% settings.forEach((setting) => { %>
             <li>
@@ -14,5 +44,16 @@
             </li>
         <% }) %>
     </ul>
+    <h2>出勤・退勤URLをブックマークに保存する</h2>
+    <p>以下のURLをブックマークに登録することで、ブックマークからすぐに打刻することができます</p>
+    <h3>出勤</h3>
+    <input id="copyTargetBegin" type="text" value="http://localhost:3000/begin" readonly>
+    <button onclick="copyToClipboardBegin()">コピー</button>
+    <h3>退勤</h3>
+    <input id="copyTargetFinish" type="text" value="http://localhost:3000/finish" readonly>
+    <button onclick="copyToClipboardFinish()">コピー</button>
+    <br>
+    <br>
+    <a href="/">ホームに戻る</a>
   </body>
 </html>
