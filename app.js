@@ -85,6 +85,14 @@ app.get('/', (req, res) => {
     }
   );
 
+  //timediffを再計算
+  connection.query(
+    'UPDATE work_time_today SET timediff = (timediff(finish_time,begin_time))',
+    (error_recalc_timediff,results_recalc_timediff) => {
+    }
+  );
+
+  //今日の出勤合計をejsに渡す
   connection.query(
     'SELECT sec_to_time(sum(timediff)) as timediff from work_time_today',
     (error_timediffSum,results_timediffSum) => {
