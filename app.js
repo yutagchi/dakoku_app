@@ -67,10 +67,10 @@ app.get('', (req, res) => {
     'SELECT * FROM work_time_today ORDER BY begin_time DESC LIMIT 1',
     (error_addFT,results_addFT) => {
 
-      //今日の打刻があるかないか
+      //今日の打刻があるかないか判別
       if(results_addFT[0] === undefined){
        res.render('home_day_first.ejs') //今日の打刻がなかったら計算する必要がないのでそのままrender
-      }else{ //今日の打刻があったら現時点での労働時間を計算して渡す
+      }else{ //今日の打刻があったら現時点での労働時間を計算
         let latest_finish_time = results_addFT[0].finish_time
         let nowTimeStamp = new Date();
         console.log(latest_finish_time);
@@ -232,17 +232,15 @@ app.get('/begin_done', (req, res) => {
 //退勤
 app.get('/finish', (rew, res) => {
   connection.query(
-    'SELECT finish_time FROM timestamps ORDER BY id DESC LIMIT 1',
+    'SELECT finish_time FROM timestamps ORDER BY id DESC LIMIT 1', //最新の打刻を取得
     (error,results) => {
       console.log(results)
-      let latest_finish_time = results[0].finish_time
+      let latest_finish_time = results[0].finish_time //最新の退勤打刻を代入
       console.log(latest_finish_time);
-      if(latest_finish_time === null){
-        res.redirect('/finish_normal');
-        console.log("未定義");
+      if(latest_finish_time === null){ 
+        res.redirect('/finish_normal'); //最新の退勤打刻が空白だったら通常通り打刻
       }else{
-        res.redirect('/finish_abnormal');
-        console.log("定義済み")
+        res.redirect('/finish_abnormal'); //最新の退勤打刻が埋まっていたら
       }
     }
   );
