@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Language" content="ja">
     <meta name="google" content="notranslate">
-    <title>Hello World</title>
+    <title>打刻アプリ</title>
+    <link rel="stylesheet" href="style.css">
   </head>
+  
   <body>
     <script>
       function set2fig(num) {
@@ -54,13 +56,22 @@
       }
       setInterval('showClock_Date()',100);
     </script>
+    <div class="header">
+      <div class="header-logo">打刻アプリ</div>
+      <div class="header-list">
+        <ul>
+          <li><a href="/">ホーム</a></li>
+          <li><a href="/begin">出勤</a></li>
+          <li><a href="/finish">退勤</a></li>
+          <li><a href="/timestamp_list">打刻一覧</a></li>
+          <li><a href="/todolist">TODOリスト編集</a></li>
+          <li><a href="/setting">設定</a></li>
+        </ul>
+      </div>
+    </div>
+
     <h1 id="RealtimeClockArea"></h1>
     <h2 id="clock_date"></h2>
     <h3>今日の勤務時間:<%= timediff.timediff %> <%= nowAtWork %></h3>
-    <a href="/begin">出勤</a>
-    <a href="/finish">退勤</a>
-    <a href="/timestamp_list">打刻一覧</a>
-    <a href="/todolist">TODOリスト編集</a>
-    <a href="/setting">設定</a>
   </body>
 </html>
