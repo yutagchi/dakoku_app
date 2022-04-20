@@ -281,7 +281,7 @@ app.get('/finish_abnormal', (rew, res) => {
 
 app.get('/finish_done', (req, res) => {
   connection.query(
-    'SELECT content FROM setting WHERE id IN (4,6)',
+    'SELECT content FROM setting',
     (error_settings, results_settings) => {
       connection.query(
         'SELECT * FROM todolist',
