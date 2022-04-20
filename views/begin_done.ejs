@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello World</title>
+    <title>出勤しました - 打刻アプリ</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <script>
@@ -35,21 +36,22 @@
       </div>
     </div>
 
-    <h1>出勤しました！</h1>
-    <h2>チャットへ連絡する</h2>
-    <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
-    <button onclick="copyToClipboard()">コピー</button>
-    <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
-    <br>
-    <h2>TODO一覧</h2>
-    <a href="/todolist/add">タスクを追加する</a>
-    <ul>
-      <% tasks.forEach((task) => { %>
-          <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
+    <h1 class="toptitle1">出勤しました！ 🌞️</h1>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">チャットへ連絡する</h2>
+      <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
+      <button onclick="copyToClipboard()">コピー</button>
+      <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
+    </div>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">TODO一覧</h2>
+      <a href="/todolist/add">タスクを追加する</a>
+      <ul>
+        <% tasks.forEach((task) => { %>
+            <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
             </li>
-      <% }) %>
-  </ul>
-    <br>
-    <a href="/">トップへ戻る</a>
+        <% }) %>
+      </ul>
+    </div> 
   </body>
 </html>

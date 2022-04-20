@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>打刻を削除しますか？ - 打刻アプリ</title>
+    <title>打刻を削除する - 打刻アプリ</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -20,6 +20,8 @@
         </ul>
       </div>
     </div>
+
+    <h1 class="toptitle1">打刻を削除する 💾</h1>
 
     <li> 開始: <%= timestamp.begin_date %> <%= timestamp.begin_time %> 終了: <%= timestamp.finish_date%> <%= timestamp.finish_time %> 労働時間: <%= timestamp.timediff %> 
    <form action="/delete/<%= timestamp.id %>" method="post">

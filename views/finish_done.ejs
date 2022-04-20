@@ -7,6 +7,22 @@
   </head>
   <body>
 
+    <script>
+      function copyToClipboard() {
+          // コピー対象をJavaScript上で変数として定義する
+          var copyTarget = document.getElementById("copyTarget");
+
+          // コピー対象のテキストを選択する
+          copyTarget.select();
+
+          // 選択しているテキストをクリップボードにコピーする
+          document.execCommand("Copy");
+
+          // コピーをお知らせする（使わない）
+          //alert("コピーできました！ : " + copyTarget.value);
+      }
+    </script>
+
     <div class="header">
       <div class="header-logo">打刻アプリ</div>
       <div class="header-list">
@@ -21,23 +37,23 @@
       </div>
     </div>
 
-    <h1>退勤しました！</h1>
-    <h2>チャットへ連絡する</h2>
-    <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
-    <button onclick="copyToClipboard()">コピー</button>
-    <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
-    <br>
-    <h2>TODO一覧</h2>
-    <a href="/todolist/add">タスクを追加する</a>
-    <ul>
-      <% tasks.forEach((task) => { %>
-          <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
+    <h1 class="toptitle1">退勤しました！ 🌙</h1>
+    <p class="otsukare">今日もお疲れ様でした🍵</p>
+    <div class="otsukarecontainer">
+      <h2 class="toptitle2">チャットへ連絡する</h2>
+      <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
+      <button onclick="copyToClipboard()">コピー</button>
+      <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
+    </div>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">TODO一覧</h2>
+      <a href="/todolist/add">タスクを追加する</a>
+      <ul>
+        <% tasks.forEach((task) => { %>
+            <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
             </li>
-      <% }) %>
-  </ul>
-    <br>
-    <p>今日もお疲れ様でした</p>
-    <br>
-    <a href="/">トップへ戻る</a>
+        <% }) %>
+      </ul>
+    </div>
   </body>
 </html>

@@ -1,5 +1,6 @@
 body {
   font-family: "Avenir Next";
+  color: #312F2F;
 }
 
 li {
@@ -58,6 +59,33 @@ li {
   background-color: #5dca88;
   cursor: pointer;
   text-align: center;
+}
+
+.toptitle1{
+  text-align: center;
+  padding: 30px 30px 0px 30px;
+}
+
+.toptitle2{
+  border-bottom: 2px solid #dee7ec;
+}
+
+.normalcontainer{
+  padding: 30px;
+}
+
+.centercontainer{
+  padding: 30px;
+  text-align: center;
+}
+
+.otsukare{
+  font-size: 20px;
+  text-align: center;
+}
+
+.otsukarecontainer{
+  padding: 5px 30px 30px 30px;
 }
 
 .copy-container h2 {

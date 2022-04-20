@@ -50,27 +50,28 @@
       </div>
     </div>
 
-    <h1>設定</h1>
-    <h2>出勤・退勤時のチャット送信</h2>
-    <p>あらかじめメッセージを設定することで、指定されたURLのチャットへかんたんにメッセージを送ることができます</p>
-    <ul>
-        <% settings.forEach((setting) => { %>
-            <li>
-              <%= setting.name %> : <%= setting.content %> 
-              <a href="/setting/edit/<%= setting.id %> ">編集</a>  
-            </li>
-        <% }) %>
-    </ul>
-    <h2>出勤・退勤URLをブックマークに保存する</h2>
-    <p>以下のURLをブックマークに登録することで、ブックマークからすぐに打刻することができます</p>
-    <h3>出勤</h3>
-    <input id="copyTargetBegin" type="text" value="http://localhost:3000/begin" readonly>
-    <button onclick="copyToClipboardBegin()">コピー</button>
-    <h3>退勤</h3>
-    <input id="copyTargetFinish" type="text" value="http://localhost:3000/finish" readonly>
-    <button onclick="copyToClipboardFinish()">コピー</button>
-    <br>
-    <br>
-    <a href="/">ホームに戻る</a>
+    <h1 class="toptitle1">設定 🛠</h1>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">出勤・退勤時のチャット送信</h2>
+      <p>あらかじめメッセージを設定することで、指定されたURLのチャットへかんたんにメッセージを送ることができます</p>
+      <ul>
+          <% settings.forEach((setting) => { %>
+              <li>
+                <%= setting.name %> : <%= setting.content %> 
+                <a href="/setting/edit/<%= setting.id %> ">編集</a>  
+              </li>
+          <% }) %>
+      </ul>
+    </div>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">出勤・退勤URLをブックマークに保存する</h2>
+      <p>以下のURLをブックマークに登録することで、ブックマークからすぐに打刻することができます</p>
+      <h3>出勤</h3>
+      <input id="copyTargetBegin" type="text" value="http://localhost:3000/begin" readonly>
+      <button onclick="copyToClipboardBegin()">コピー</button>
+      <h3>退勤</h3>
+      <input id="copyTargetFinish" type="text" value="http://localhost:3000/finish" readonly>
+      <button onclick="copyToClipboardFinish()">コピー</button>
+    </div>
   </body>
 </html>
