@@ -1,0 +1,195 @@
+body {
+  font-family: "Avenir Next";
+  color: #312F2F;
+}
+
+li {
+  list-style: none;
+}
+
+.header {
+  background-color: #20b2aa;
+  color: #fff;
+  height: 90px;
+}
+
+.header-logo {
+  float: left;
+  font-size: 36px;
+  padding: 20px 40px;
+}
+
+.header-list li {
+  color: #dee7ec;
+  float: left;
+  padding: 33px 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.status-area {
+  padding: 30px 30px;
+  text-align: center;
+}
+
+.status-area h1 {
+  font-size: 70px;
+  padding: 20px 20px;
+}
+
+.buttonrwrapper {
+  text-align: center;
+}
+
+.btn {
+  padding: 8px 24px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 15px;
+}
+
+.message {
+  padding: 15px 40px;
+  background-color: #5dca88;
+  cursor: pointer;
+  text-align: center;
+}
+
+.toptitle1{
+  text-align: center;
+  padding: 30px 30px 0px 30px;
+}
+
+.toptitle2{
+  border-bottom: 2px solid #dee7ec;
+}
+
+.normalcontainer{
+  padding: 30px;
+}
+
+.centercontainer{
+  padding: 30px;
+  text-align: center;
+}
+
+.otsukare{
+  font-size: 20px;
+  text-align: center;
+}
+
+.otsukarecontainer{
+  padding: 5px 30px 30px 30px;
+}
+
+.sublink{
+  text-align: center;
+  padding: 5px 2px 20px 2px;
+}
+
+.sublinkbtn{
+  padding: 3px 10px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #5dca88;
+  cursor: pointer;
+  text-align: center;
+  margin: 0px 10px;
+}
+
+.timestamp{
+  padding: 3px 0px;
+}
+
+.editbtn{
+  padding: 2.5px 8px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #6495ed;
+  cursor: pointer;
+  text-align: center;
+}
+
+.deletebtn{
+  padding: 2.5px 8px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #ff7f50;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* こっから下はついてきたやつ */
+
+.copy-container h2 {
+  font-size: 60px;
+}
+
+.copy-container span {
+  color: #ff4a4a;
+}
+
+.contents {
+  height: 500px;
+  margin-top: 100px;
+}
+
+.section-title {
+  border-bottom: 2px solid #dee7ec;
+  font-size: 28px;
+  padding-bottom: 15px;
+  margin-bottom: 50px;
+}
+
+.contents-item {
+  float: left;
+  margin-right: 40px;
+}
+
+.contents-item p {
+  font-size: 24px;
+  margin-top: 30px;
+}
+
+/* contact-formのpadding-topを100pxにしてください */
+.contact-form {
+  padding-top: 100px;
+}
+
+.footer {
+  background-color: #2f5167;
+  color: #fff;
+  height: 120px;
+  padding: 40px;
+}
+
+.footer-logo {
+  float: left;
+  font-size: 32px;
+}
+
+.footer-list {
+  float: right;
+}
+
+.footer-list li {
+  padding-bottom: 20px;
+}

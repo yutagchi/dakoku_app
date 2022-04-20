@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello World</title>
+    <title>設定 - 打刻アプリ</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <script>
@@ -33,27 +34,44 @@
           // コピーをお知らせする（使わない）
           //alert("コピーできました！ : " + copyTargetFinish.value);
       }
-  </script>
-    <h1>設定</h1>
-    <h2>出退勤時のチャット送信</h2>
-    <ul>
-        <% settings.forEach((setting) => { %>
-            <li>
-              <%= setting.name %> : <%= setting.content %> 
-              <a href="/setting/edit/<%= setting.id %> ">編集</a>  
-            </li>
-        <% }) %>
-    </ul>
-    <h2>出勤・退勤URLをブックマークに保存する</h2>
-    <p>以下のURLをブックマークに登録することで、ブックマークからすぐに打刻することができます</p>
-    <h3>出勤</h3>
-    <input id="copyTargetBegin" type="text" value="http://localhost:3000/begin" readonly>
-    <button onclick="copyToClipboardBegin()">コピー</button>
-    <h3>退勤</h3>
-    <input id="copyTargetFinish" type="text" value="http://localhost:3000/finish" readonly>
-    <button onclick="copyToClipboardFinish()">コピー</button>
-    <br>
-    <br>
-    <a href="/">ホームに戻る</a>
+    </script>
+
+    <div class="header">
+      <div class="header-logo">打刻アプリ</div>
+      <div class="header-list">
+        <ul>
+          <li><a class="link" href="/">ホーム</a></li>
+          <li><a class="link" href="/begin">出勤</a></li>
+          <li><a class="link" href="/finish">退勤</a></li>
+          <li><a class="link" href="/timestamp_list">打刻一覧</a></li>
+          <li><a class="link" href="/todolist">TODOリスト編集</a></li>
+          <li><a class="link" href="/setting">設定</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h1 class="toptitle1">設定 🛠</h1>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">出勤・退勤時のチャット送信</h2>
+      <p>あらかじめメッセージを設定することで、指定されたURLのチャットへかんたんにメッセージを送ることができます</p>
+      <ul>
+          <% settings.forEach((setting) => { %>
+              <li>
+                <%= setting.name %> : <%= setting.content %> 
+                <a href="/setting/edit/<%= setting.id %> ">編集</a>  
+              </li>
+          <% }) %>
+      </ul>
+    </div>
+    <div class="normalcontainer">
+      <h2 class="toptitle2">出勤・退勤URLをブックマークに保存する</h2>
+      <p>以下のURLをブックマークに登録することで、ブックマークからすぐに打刻することができます</p>
+      <h3>出勤</h3>
+      <input id="copyTargetBegin" type="text" value="http://localhost:3000/begin" readonly>
+      <button onclick="copyToClipboardBegin()">コピー</button>
+      <h3>退勤</h3>
+      <input id="copyTargetFinish" type="text" value="http://localhost:3000/finish" readonly>
+      <button onclick="copyToClipboardFinish()">コピー</button>
+    </div>
   </body>
 </html>

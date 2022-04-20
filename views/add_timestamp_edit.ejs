@@ -2,13 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello World</title>
+    <title>打刻を追加する - 打刻アプリ</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-   <form action="/add_timestamp" method="post">
-       <input type="datetime-local" name="begin_time">
-       <input type="datetime-local" name="finish_time">
-       <input type="submit" value="追加">
-   </form>
+    <div class="header">
+      <div class="header-logo">打刻アプリ</div>
+      <div class="header-list">
+        <ul>
+          <li><a class="link" href="/">ホーム</a></li>
+          <li><a class="link" href="/begin">出勤</a></li>
+          <li><a class="link" href="/finish">退勤</a></li>
+          <li><a class="link" href="/timestamp_list">打刻一覧</a></li>
+          <li><a class="link" href="/todolist">TODOリスト編集</a></li>
+          <li><a class="link" href="/setting">設定</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h1 class="toptitle1">打刻を追加する 🚀</h1>
+
+    <div class="centercontainer">
+      <form action="/add_timestamp" method="post">
+        <input type="datetime-local" name="begin_time">
+        <input type="datetime-local" name="finish_time">
+        <input type="submit" value="追加">
+      </form>
+    </div>
+
   </body>
 </html>

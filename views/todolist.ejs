@@ -2,13 +2,34 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello World</title>
+    <title> TODOリスト</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <a href="/todolist/add">タスクを追加する</a>
+
+    <div class="header">
+      <div class="header-logo">打刻アプリ</div>
+      <div class="header-list">
+        <ul>
+          <li><a class="link" href="/">ホーム</a></li>
+          <li><a class="link" href="/begin">出勤</a></li>
+          <li><a class="link" href="/finish">退勤</a></li>
+          <li><a class="link" href="/timestamp_list">打刻一覧</a></li>
+          <li><a class="link" href="/todolist">TODOリスト編集</a></li>
+          <li><a class="link" href="/setting">設定</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h1 class="toptitle1">タスク一覧　📝</h1>
+
+    <div class="sublink">
+      <a  class="sublinkbtn" href="/todolist/add">タスクを追加する</a>
+    </div>
+
     <ul>
         <% tasks.forEach((task) => { %>
-            <li> <a href="/todolist/edit/<%= task.id %> ">編集</a> <a href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
+            <li> <a class="editbtn" href="/todolist/edit/<%= task.id %> ">編集</a> <a class="deletebtn" href="/todolist/delete/<%= task.id %>">削除</a>  <%= task.name %> 
               </li>
         <% }) %>
     </ul>
