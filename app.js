@@ -71,8 +71,8 @@ app.get('', (req, res) => {
 
       //今日の打刻があるかないか判別
       if(results_addFT[0] === undefined){
-       res.render('home_day_first.ejs') //今日の打刻がなかったら計算する必要がないのでそのままrender
-      }else{ //今日の打刻があったら現時点での労働時間を計算
+       res.render('home_day_first.ejs') //今日の打刻がない：計算する必要がないのでそのままrender
+      }else{ //今日の打刻がある：現時点での労働時間を計算
         let latest_finish_time = results_addFT[0].finish_time
         let nowTimeStamp = new Date();
         console.log(latest_finish_time);
@@ -101,9 +101,18 @@ app.get('', (req, res) => {
         connection.query(
           'SELECT sec_to_time(sum(timediff)) as timediff from work_time_today',
           (error_timediffSum,results_timediffSum) => {
-           console.log(results_timediffSum);
-            res.render('home.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]});
-            console.log(typeof(results_timediffSum));
+            connection.query(
+              'SELECT finish_time FROM timestamps ORDER BY begin_time DESC LIMIT 1', //最新の打刻1件を取得
+              (error_latest_finishtime_Arr,results_latest_finishtime_Arr) => {
+                let latest_finish_time = results_latest_finishtime_Arr[0].finish_time //最新の退勤打刻を代入
+                console.log(latest_finish_time);
+                if(latest_finish_time === null || latest_finish_time === undefined){ 
+                  res.render('home_finish.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]}); //最新の退勤打刻が空白だったら（次は退勤）
+                }else{
+                  res.render('home_begin.ejs',{timediff: results_timediffSum[0],nowAtWork: nowAtWork[0]}); //最新の退勤打刻が埋まっていたら（次は出勤）
+                }
+              }
+            );
           }
         )
       }
