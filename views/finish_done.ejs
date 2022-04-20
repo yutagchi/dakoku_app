@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>退勤しました - 打刻アプリ</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_finish_done.css">
   </head>
   <body>
 
@@ -35,6 +35,81 @@
           // コピーをお知らせする（使わない）
           //alert("コピーできました！ : " + copyTarget.value);
       }
+
+      particlesJS("particles-js",{
+    "particles":{
+      "number":{
+        "value":125,//この数値を変更すると紙吹雪の数が増減できる
+        "density":{
+          "enable":false,
+          "value_area":400
+        }
+      },
+      "color": {
+          "value": ["#EA5532", "#F6AD3C", "#FFF33F", "#00A95F", "#00ADA9", "#00AFEC","#4D4398", "#E85298"]//紙吹雪の色の数を増やすことが出来る
+      },
+      "shape":{
+        "type":"polygon",//形状はpolygonを指定
+        "stroke":{
+          "width":0,
+        },
+        "polygon":{
+          "nb_sides":5//多角形の角の数
+        }
+        },
+        "opacity":{
+          "value":1,
+          "random":false,
+          "anim":{
+            "enable":true,
+            "speed":20,
+            "opacity_min":0,
+            "sync":false
+          }
+        },
+        "size":{
+          "value":5.305992965476349,
+          "random":true,//サイズをランダムに
+          "anim":{
+            "enable":true,
+            "speed":1.345709068776642,
+            "size_min":0.8,
+            "sync":false
+          }
+        },
+        "line_linked":{
+          "enable":false,
+        },
+        "move":{
+          "enable":true,
+        "speed":10,//この数値を小さくするとゆっくりな動きになる
+        "direction":"bottom",//下に向かって落ちる
+        "random":false,//動きはランダムにならないように
+        "straight":false,//動きをとどめない
+        "out_mode":"out",//画面の外に出るように描写
+        "bounce":false,//跳ね返りなし
+          "attract":{
+            "enable":false,
+            "rotateX":600,
+            "rotateY":1200
+          }
+        }
+      },
+      "interactivity":{
+        "detect_on":"canvas",
+        "events":{
+          "onhover":{
+            "enable":false,
+          },
+          "onclick":{
+            "enable":false,
+          },
+          "resize":true
+        },
+      },
+      "retina_detect":true
+    });
+
     </script>
 
     <div class="header">
@@ -51,12 +126,18 @@
       </div>
     </div>
 
+    <div id="particles-js"></div>
+
+    <div id="wrapper">
     <h1 class="toptitle1">退勤しました！ 🌙</h1>
     <p class="otsukare">今日もお疲れ様でした🍵</p>
+    </div>
+    
+    <div class="nocracker">
 
     <div class="otsukarecontainer">
       <h2 class="toptitle2">チャットへ連絡する</h2>
-      <input id="copyTargetOffice" type="text" value=<%= settings[1].content %> readonly>
+      <input id="copyTargetOffice" type="text" value=<%= settings[2].content %> readonly>
       <button onclick="copyToClipboardOffice()">コピー</button>
       <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
     </div>
@@ -77,6 +158,10 @@
             </li>
         <% }) %>
       </ul>
+    </div> 
+
     </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-8/js/5-8.js"></script>
   </body>
 </html>

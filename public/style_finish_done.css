@@ -1,0 +1,160 @@
+body {
+  font-family: "Avenir Next";
+  color: #312F2F;
+}
+
+li {
+  list-style: none;
+}
+
+.header {
+  background-color: #20b2aa;
+  color: #fff;
+  height: 90px;
+}
+
+.header-logo {
+  float: left;
+  font-size: 36px;
+  padding: 20px 40px;
+}
+
+.header-list li {
+  color: #dee7ec;
+  float: left;
+  padding: 33px 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.status-area {
+  padding: 30px 30px;
+  text-align: center;
+}
+
+.status-area h1 {
+  font-size: 70px;
+  padding: 20px 20px;
+}
+
+.buttonrwrapper {
+  text-align: center;
+}
+
+.btn {
+  padding: 8px 24px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 15px;
+}
+
+.message {
+  padding: 15px 40px;
+  background-color: #5dca88;
+  cursor: pointer;
+  text-align: center;
+}
+
+.toptitle1{
+  text-align: center;
+  padding: 30px 30px 0px 30px;
+  margin: 0% 30%;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.toptitle2{
+  border-bottom: 2px solid #dee7ec;
+}
+
+.normalcontainer{
+  padding: 30px;
+}
+
+.centercontainer{
+  padding: 30px;
+  text-align: center;
+}
+
+.otsukare{
+  font-size: 20px;
+  padding: 0px 15px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.otsukarecontainer{
+  padding: 5px 30px 30px 30px;
+}
+
+.nocracker{
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.sublink{
+  text-align: center;
+  padding: 5px 2px 20px 2px;
+}
+
+.sublinkbtn{
+  padding: 3px 10px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #5dca88;
+  cursor: pointer;
+  text-align: center;
+  margin: 0px 10px;
+}
+
+.timestamp{
+  padding: 3px 0px;
+}
+
+.editbtn{
+  padding: 2.5px 8px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #6495ed;
+  cursor: pointer;
+  text-align: center;
+}
+
+.deletebtn{
+  padding: 2.5px 8px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #ff7f50;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* こっから下はついてきたやつ */
+#particles-js{ 
+  position:fixed;/*描画固定*/
+  z-index:-1;/*描画を一番下に*/
+  width: 100%;
+  height: 50%;
+}
+
+#wrapper{
+  position: relative;/*描画を#particles-jsよりも上にするためposition:relative;を指定*/
+  z-index: 1;/*z-indexの数字を大きくすることで描画を#particles-jsよりも上に*/
+  padding: 50px 0px;
+}

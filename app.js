@@ -7,6 +7,7 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//CSS読み込み
 app.use(express.static('public'));
 
 //mysqlの準備
