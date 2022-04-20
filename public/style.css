@@ -7,7 +7,7 @@ li {
 }
 
 .header {
-  background-color: #26d0c9;
+  background-color: #20b2aa;
   color: #fff;
   height: 90px;
 }
@@ -19,16 +19,45 @@ li {
 }
 
 .header-list li {
+  color: #dee7ec;
   float: left;
   padding: 33px 20px;
 }
 
-.main {
-  padding: 100px 80px;
+.link {
+  text-decoration: none;
+  color: #fff;
 }
 
-.copy-container h1 {
-  font-size: 140px;
+.status-area {
+  padding: 30px 30px;
+  text-align: center;
+}
+
+.status-area h1 {
+  font-size: 70px;
+  padding: 20px 20px;
+}
+
+.buttonrwrapper {
+  text-align: center;
+}
+
+.btn {
+  padding: 8px 24px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 15px;
+}
+
+.message {
+  padding: 15px 40px;
+  background-color: #5dca88;
+  cursor: pointer;
+  text-align: center;
 }
 
 .copy-container h2 {

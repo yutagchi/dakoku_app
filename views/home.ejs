@@ -60,18 +60,24 @@
       <div class="header-logo">打刻アプリ</div>
       <div class="header-list">
         <ul>
-          <li><a href="/">ホーム</a></li>
-          <li><a href="/begin">出勤</a></li>
-          <li><a href="/finish">退勤</a></li>
-          <li><a href="/timestamp_list">打刻一覧</a></li>
-          <li><a href="/todolist">TODOリスト編集</a></li>
-          <li><a href="/setting">設定</a></li>
+          <li><a class="link" href="/">ホーム</a></li>
+          <li><a class="link" href="/begin">出勤</a></li>
+          <li><a class="link" href="/finish">退勤</a></li>
+          <li><a class="link" href="/timestamp_list">打刻一覧</a></li>
+          <li><a class="link" href="/todolist">TODOリスト編集</a></li>
+          <li><a class="link" href="/setting">設定</a></li>
         </ul>
       </div>
     </div>
 
-    <h1 id="RealtimeClockArea"></h1>
-    <h2 id="clock_date"></h2>
-    <h3>今日の勤務時間:<%= timediff.timediff %> <%= nowAtWork %></h3>
+    <div class="status-area">
+      <h1 id="RealtimeClockArea"></h1>
+      <h2 id="clock_date"></h2>
+      <h3>今日の勤務時間:<%= timediff.timediff %> <%= nowAtWork %></h3>
+    </div>
+   <div class="buttonrwrapper">
+      <a class="btn message" href="/begin">出勤</a>
+      <a class="btn message" href="/finish">退勤</a>
+  </div>
   </body>
 </html>
