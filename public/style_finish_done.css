@@ -145,7 +145,7 @@ li {
   text-align: center;
 }
 
-/* こっから下はついてきたやつ */
+/* クラッカー */
 #particles-js{ 
   position:fixed;/*描画固定*/
   z-index:-1;/*描画を一番下に*/
