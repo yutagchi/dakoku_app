@@ -23,14 +23,18 @@
 
     <h1 class="toptitle1">打刻一覧 ⏰</h1>
 
-    <a href="/timestamp_list_gb_days">日別に見る</a>
-    <a href="/add_timestamp_edit">打刻を追加する</a>
+    <div class="sublink">
+      <a class="sublinkbtn" href="/timestamp_list_gb_days">日別に見る</a>
+      <a class="sublinkbtn" href="/add_timestamp_edit">打刻を追加する</a>
+    </div>
     <ul>
         <% timestamps.forEach((timestamp) => { %>
+          <div class="timestamp">
           <li> 
-            <a href="/edit/<%= timestamp.id %> ">編集</a> <a href="/confirm_delete/<%= timestamp.id %>">削除</a>
+            <a class="editbtn" href="/edit/<%= timestamp.id %> ">編集</a> <a class="deletebtn" href="/confirm_delete/<%= timestamp.id %>">削除</a>
              開始: <%= timestamp.begin_time %> 終了: <%= timestamp.finish_time %> 労働時間: <%= timestamp.timediff %> 
           </li>
+          </div>
         <% }) %>
     </ul>
   </body>

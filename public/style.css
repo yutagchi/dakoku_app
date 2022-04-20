@@ -88,6 +88,57 @@ li {
   padding: 5px 30px 30px 30px;
 }
 
+.sublink{
+  text-align: center;
+  padding: 5px 2px 20px 2px;
+}
+
+.sublinkbtn{
+  padding: 3px 10px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #5dca88;
+  cursor: pointer;
+  text-align: center;
+  margin: 0px 10px;
+}
+
+.timestamp{
+  padding: 3px 0px;
+}
+
+.editbtn{
+  padding: 2.5px 8px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #6495ed;
+  cursor: pointer;
+  text-align: center;
+}
+
+.deletebtn{
+  padding: 2.5px 8px;
+  color: white;
+  display: inline-block;
+  opacity: 0.8;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 3px;
+  background-color: #ff7f50;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* こっから下はついてきたやつ */
+
 .copy-container h2 {
   font-size: 60px;
 }

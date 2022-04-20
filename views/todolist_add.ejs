@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>TODOリストに追加する - 打刻アプリ</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
   </head>
   <body>
 
@@ -22,9 +22,11 @@
     </div>
 
     <h1 class="toptitle1">タスクを追加する 🏃</h1>
-   <form action="/todolist/add/update" method="post">
-       <input type="text" name="newtask">
-       <input type="submit" value="追加">
-   </form>
+    <div class="centercontainer">
+      <form action="/todolist/add/update" method="post">
+        <input type="text" name="newtask">
+        <input type="submit" value="追加">
+      </form>
+   </div>
   </body>
 </html>

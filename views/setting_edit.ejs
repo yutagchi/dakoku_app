@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>設定を編集する - 打刻アプリ</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../style.css">
   </head>
   <body>
 
@@ -23,11 +23,13 @@
    
     <h1 class="toptitle1">設定変更 ⛑</h1>
 
-   <form action="/setting/update/<%= setting.id %>" method="post">
+    <div class="centercontainer">
+      <form action="/setting/update/<%= setting.id %>" method="post">
         <p> <%= setting.name %></p>
-       <input type="text" name="newcontent" value="<%= setting.content %>">
-       <input type="submit" value="更新する">
-   </form>
+        <input type="text" name="newcontent" value="<%= setting.content %>">
+        <input type="submit" value="更新する">
+      </form>
+   </div>
   </body>
 </html>
 
