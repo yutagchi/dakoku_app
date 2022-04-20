@@ -51,18 +51,41 @@
     </div>
 
     <h1 class="toptitle1">設定 🛠</h1>
+
     <div class="normalcontainer">
-      <h2 class="toptitle2">出勤・退勤時のチャット送信</h2>
-      <p>あらかじめメッセージを設定することで、指定されたURLのチャットへかんたんにメッセージを送ることができます</p>
+      <h2 class="toptitle2">出勤・退勤時の社内チャット送信</h2>
+      <p>あらかじめメッセージを設定することで、指定されたURLの社内チャットへかんたんにメッセージを送ることができます</p>
       <ul>
-          <% settings.forEach((setting) => { %>
-              <li>
-                <%= setting.name %> : <%= setting.content %> 
-                <a href="/setting/edit/<%= setting.id %> ">編集</a>  
-              </li>
-          <% }) %>
+        <li>
+           <a class="editbtn" href="/setting/edit/<%= settings[0].id %> ">編集</a> 
+            <%= settings[0].name %> : <%= settings[0].content %>  
+        </li>
+        <li>
+          <a class="editbtn" href="/setting/edit/<%= settings[1].id %> ">編集</a> 
+          <%= settings[1].name %> : <%= settings[1].content %>  
+        </li>
+        <li>
+            <a class="editbtn" href="/setting/edit/<%= settings[2].id %> ">編集</a>
+           <%= settings[2].name %> : <%= settings[2].content %>   
+        </li>
       </ul>
     </div>
+
+    <div class="normalcontainer">
+      <h2 class="toptitle2">退勤時の帰宅チャット送信</h2>
+        <p>退勤時に家族や同居人へ帰宅の連絡ができます</p>
+        <ul>
+          <li>
+            <a class="editbtn" href="/setting/edit/<%= settings[3].id %> ">編集</a>  
+            <%= settings[3].name %> : <%= settings[3].content %> 
+          </li>
+          <li>
+            <a class="editbtn" href="/setting/edit/<%= settings[4].id %> ">編集</a>  
+            <%= settings[4].name %> : <%= settings[4].content %> 
+          </li>
+        </ul>
+    </div>
+
     <div class="normalcontainer">
       <h2 class="toptitle2">出勤・退勤URLをブックマークに保存する</h2>
       <p>以下のURLをブックマークに登録することで、ブックマークからすぐに打刻することができます</p>

@@ -8,9 +8,23 @@
   <body>
 
     <script>
-      function copyToClipboard() {
+      function copyToClipboardOffice() {
           // コピー対象をJavaScript上で変数として定義する
-          var copyTarget = document.getElementById("copyTarget");
+          var copyTarget = document.getElementById("copyTargetOffice");
+
+          // コピー対象のテキストを選択する
+          copyTarget.select();
+
+          // 選択しているテキストをクリップボードにコピーする
+          document.execCommand("Copy");
+
+          // コピーをお知らせする（使わない）
+          //alert("コピーできました！ : " + copyTarget.value);
+      }
+
+      function copyToClipboardPrivate() {
+          // コピー対象をJavaScript上で変数として定義する
+          var copyTarget = document.getElementById("copyTargetPrivate");
 
           // コピー対象のテキストを選択する
           copyTarget.select();
@@ -39,12 +53,21 @@
 
     <h1 class="toptitle1">退勤しました！ 🌙</h1>
     <p class="otsukare">今日もお疲れ様でした🍵</p>
+
     <div class="otsukarecontainer">
       <h2 class="toptitle2">チャットへ連絡する</h2>
-      <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>
-      <button onclick="copyToClipboard()">コピー</button>
+      <input id="copyTargetOffice" type="text" value=<%= settings[1].content %> readonly>
+      <button onclick="copyToClipboardOffice()">コピー</button>
       <button onclick="window.open('<%= settings[0].content %>')">チャット起動</button>
     </div>
+
+    <div class="normalcontainer">
+      <h2 class="toptitle2">家族・同居人へ連絡する</h2>
+      <input id="copyTargetPrivate" type="text" value=<%= settings[4].content %> readonly>
+      <button onclick="copyToClipboardPrivate()">コピー</button>
+      <button onclick="window.open('<%= settings[3].content %>')">チャット起動</button>
+    </div>
+
     <div class="normalcontainer">
       <h2 class="toptitle2">TODO一覧</h2>
       <a class="sublinkbtn" href="/todolist/add">タスクを追加する</a>
