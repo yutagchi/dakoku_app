@@ -19,7 +19,22 @@
           // コピーをお知らせする（使わない）
           //alert("コピーできました！ : " + copyTarget.value);
       }
-  </script>
+    </script>
+
+    <div class="header">
+      <div class="header-logo">打刻アプリ</div>
+      <div class="header-list">
+        <ul>
+          <li><a class="link" href="/">ホーム</a></li>
+          <li><a class="link" href="/begin">出勤</a></li>
+          <li><a class="link" href="/finish">退勤</a></li>
+          <li><a class="link" href="/timestamp_list">打刻一覧</a></li>
+          <li><a class="link" href="/todolist">TODOリスト編集</a></li>
+          <li><a class="link" href="/setting">設定</a></li>
+        </ul>
+      </div>
+    </div>
+
     <h1>出勤しました！</h1>
     <h2>チャットへ連絡する</h2>
     <input id="copyTarget" type="text" value=<%= settings[1].content %> readonly>

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Language" content="ja">
     <meta name="google" content="notranslate">
-    <title>Hello World</title>
+    <title>打刻アプリ</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <script>
@@ -54,6 +55,21 @@
       }
       setInterval('showClock_Date()',100);
     </script>
+
+    <div class="header">
+      <div class="header-logo">打刻アプリ</div>
+      <div class="header-list">
+        <ul>
+          <li><a class="link" href="/">ホーム</a></li>
+          <li><a class="link" href="/begin">出勤</a></li>
+          <li><a class="link" href="/finish">退勤</a></li>
+          <li><a class="link" href="/timestamp_list">打刻一覧</a></li>
+          <li><a class="link" href="/todolist">TODOリスト編集</a></li>
+          <li><a class="link" href="/setting">設定</a></li>
+        </ul>
+      </div>
+    </div>
+
     <h1 id="RealtimeClockArea"></h1>
     <h2 id="clock_date"></h2>
     <h3>今日の打刻はありません</h3>
