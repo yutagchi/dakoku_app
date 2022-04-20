@@ -10,7 +10,7 @@
   </head>
   
   <body>
-    <script>
+    <script> //時間と日付表示用のスクリプト
       function set2fig(num) {
         // 桁数が1桁だったら先頭に0を加えて2桁に調整する
         var ret;
@@ -56,7 +56,8 @@
       }
       setInterval('showClock_Date()',100);
     </script>
-    <div class="header">
+
+    <div class="header"> <!-- ヘッダー -->
       <div class="header-logo">打刻アプリ</div>
       <div class="header-list">
         <ul>
@@ -75,6 +76,7 @@
       <h2 id="clock_date"></h2>
       <h3>今日の勤務時間:<%= timediff.timediff %> <%= nowAtWork %></h3>
     </div>
+    
    <div class="buttonrwrapper">
       <a class="btn message" href="/begin">出勤</a>
       <a class="btn message" href="/finish">退勤</a>
